@@ -1,8 +1,12 @@
-const TodoListItem = ({ name }) => {
+const TodoListItem = ({ name, todoDispatch, id }) => {
   return (
-    <div>
+    <div className="list">
       <span>{name}</span>
-      <button>삭제</button>
+      <button
+        onClick={() => todoDispatch({ type: "remove-todo", payload: { id } })}
+      >
+        삭제
+      </button>
     </div>
   );
 };

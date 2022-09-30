@@ -5,8 +5,16 @@
   width: 100%;
 }
 
-h2, p { text-align: center; }
+h2, p, .list { text-align: center; }
 .clickaction {
   display: flex;
   justify-content: center;
+}
+
+.list {
+  padding: 10px;
+}
+
+.list span {
+  font-size: 24px;
 }

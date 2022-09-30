@@ -11,6 +11,7 @@ import "./App.css";
 const TODOACTION_TYPES = {
   addlist: "add-todo",
   removelist: "remove-todo",
+  solvelist: "solve-todo",
 };
 
 const todoReducer = (state, action) => {
@@ -22,12 +23,23 @@ const todoReducer = (state, action) => {
       const newList = {
         id: Date.now(),
         name: listname,
-        isHere: false,
       };
       return {
-        count: state.count,
+        count: state.count + 1,
         lists: [...state.lists, newList],
       };
+
+    case TODOACTION_TYPES.removelist:
+      return {
+        count: state.count - 1,
+        // todoList컨퍼넌트에 인자로 id를 넘겨 주었기 때문에 id로 분별해낸다.
+        // filter메소드를 이용해 list에 id가 payload의 id가 해당하지 않는 list들을 filtering 해 준다.
+        lists: state.lists.filter((list) => list.id !== action.payload.id),
+      };
+
+    case TODOACTION_TYPES.solvelist:
+      return {};
+
     default:
       return state;
   }
@@ -35,13 +47,7 @@ const todoReducer = (state, action) => {
 
 const initialstate = {
   count: 0,
-  lists: [
-    {
-      id: Date.now(),
-      name: "Eille",
-      isHere: false,
-    },
-  ],
+  lists: [],
 };
 
 function App() {
@@ -50,6 +56,10 @@ function App() {
 
   const [money, bankDispatch] = useReducer(bankReducer, 0);
   const [todolistInfo, todoDispatch] = useReducer(todoReducer, initialstate);
+
+  const onChangeValue = (e) => {
+    setListItem(e.target.value);
+  };
 
   return (
     <>
@@ -92,11 +102,14 @@ function App() {
             type="text"
             placeholder="LIST를 추가해주세요."
             value={listitem}
-            onChange={(e) => setListItem(e.target.value)}
+            onChange={onChangeValue}
           />
           <button
             onClick={() => {
-              todoDispatch({ type: "add-todo", payload: { listitem } });
+              todoDispatch({
+                type: TODOACTION_TYPES.addlist,
+                payload: { listitem },
+              });
             }}
           >
             LIST 추가
@@ -104,7 +117,14 @@ function App() {
         </div>
 
         {todolistInfo.lists.map((list) => {
-          return <TodoListItem key={list.id} name={list.name} />;
+          return (
+            <TodoListItem
+              key={list.id}
+              name={list.name}
+              todoDispatch={todoDispatch}
+              id={list.id}
+            />
+          );
         })}
       </div>
     </>
