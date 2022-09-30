@@ -1,4 +1,4 @@
-const TodoListItem = ({ name, id }) => {
+const TodoListItem = ({ name }) => {
   return (
     <div>
       <span>{name}</span>
