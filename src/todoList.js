@@ -1,8 +1,8 @@
-const TodoListItem = ({ name }) => {
+const TodoListItem = ({ name, id }) => {
   return (
     <div>
       <span>{name}</span>
-      <button></button>
+      <button>삭제</button>
     </div>
   );
 };

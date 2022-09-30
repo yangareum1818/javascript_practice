@@ -18,7 +18,18 @@ const todoReducer = (state, action) => {
 
   switch (action.type) {
     case TODOACTION_TYPES.addlist:
-      return;
+      const listname = action.payload.listitem;
+      const newList = {
+        id: Date.now(),
+        name: listname,
+        isHere: false,
+      };
+      return {
+        count: state.count,
+        lists: [...state.lists, newList],
+      };
+    default:
+      return state;
   }
 };
 
@@ -35,7 +46,7 @@ const initialstate = {
 
 function App() {
   const [number, setNumber] = useState(0);
-  const [name, setName] = useState("");
+  const [listitem, setListItem] = useState("");
 
   const [money, bankDispatch] = useReducer(bankReducer, 0);
   const [todolistInfo, todoDispatch] = useReducer(todoReducer, initialstate);
@@ -80,21 +91,21 @@ function App() {
           <input
             type="text"
             placeholder="LIST를 추가해주세요."
-            value={name}
-            onChang={(e) => setName(e.target.value)}
+            value={listitem}
+            onChange={(e) => setListItem(e.target.value)}
           />
           <button
             onClick={() => {
-              todoDispatch({ type: "add-todo", payload: { name } });
+              todoDispatch({ type: "add-todo", payload: { listitem } });
             }}
           >
             LIST 추가
           </button>
-
-          {todolistInfo.lists.map((list) => {
-            <TodoListItem key={list.id} name={list.name} />;
-          })}
         </div>
+
+        {todolistInfo.lists.map((list) => {
+          return <TodoListItem key={list.id} name={list.name} />;
+        })}
       </div>
     </>
   );
