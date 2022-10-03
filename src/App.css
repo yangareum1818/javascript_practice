@@ -12,9 +12,24 @@ h2, p, .list { text-align: center; }
 }
 
 .list {
-  padding: 10px;
+  padding: 5px 0;
+  font-size: 0;
 }
 
 .list span {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 10px;
+  border: 1px solid #000;
+  border-radius: 3px;
   font-size: 24px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.btn {
+  padding: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
 }

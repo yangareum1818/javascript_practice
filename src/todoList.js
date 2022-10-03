@@ -1,9 +1,24 @@
-const TodoListItem = ({ name, todoDispatch, id }) => {
+import { TODOACTION_TYPES } from "./reducer/todoReducer";
+
+const TodoListItem = ({ name, todoDispatch, id, isHere }) => {
   return (
     <div className="list">
-      <span>{name}</span>
+      <span
+        style={{
+          backgroundColor: isHere ? "#000" : "#fff",
+          color: isHere ? "#fff" : "#000",
+        }}
+        onClick={() =>
+          todoDispatch({ type: TODOACTION_TYPES.solvelist, payload: { id } })
+        }
+      >
+        {name}
+      </span>
       <button
-        onClick={() => todoDispatch({ type: "remove-todo", payload: { id } })}
+        className="btn"
+        onClick={() =>
+          todoDispatch({ type: TODOACTION_TYPES.removelist, payload: { id } })
+        }
       >
         삭제
       </button>
