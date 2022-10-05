@@ -8,6 +8,12 @@ import {
 import TodoListItem from "./todoList";
 import "./App.css";
 
+// useState : 지역변수 => 메모리
+// useReducer : 전역변수 => 메모리
+// Parent.js => child1.js , child2.js => 메모리
+// Parent1.js, Parent2.js : localstorage(disk)
+// number => setNumber => onClick => dispatch(setNumber) (x) => reducer
+
 function App() {
   const [number, setNumber] = useState(0);
   const [listitem, setListItem] = useState("");
@@ -23,13 +29,13 @@ function App() {
     <>
       <div className="wrap">
         <h2>간단한 useReducer 은행</h2>
-        <p>잔고 : {money} 원</p>
+        <Title />
 
         <div className="clickaction">
           <input
             type="number"
             value={number}
-            onChange={(e) => setNumber(parseInt(e.target.value))}
+            onChange={(e) => (money = parseInt(e.target.value))}
             step="1000"
           />
           <button
@@ -78,10 +84,11 @@ function App() {
           return (
             <TodoListItem
               key={list.id}
-              name={list.name}
+              // name={list.name}
               todoDispatch={todoDispatch}
-              id={list.id}
-              isHere={list.isHere}
+              // id={list.id}
+              // isHere={list.isHere}
+              list={list}
             />
           );
         })}

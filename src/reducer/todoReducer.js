@@ -4,6 +4,8 @@ export const TODOACTION_TYPES = {
   solvelist: "solve-todo",
 };
 
+todoReducer({}, "solve_todo");
+
 export const todoReducer = (state, action) => {
   console.log("todolist", state, action);
 
@@ -15,6 +17,12 @@ export const todoReducer = (state, action) => {
         name: listname,
         isHere: false,
       };
+
+      {
+        count: count + 1;
+        lists.push(newList);
+      }
+
       return {
         count: state.count + 1,
         lists: [...state.lists, newList],
@@ -23,6 +31,11 @@ export const todoReducer = (state, action) => {
     case TODOACTION_TYPES.removelist:
       return {
         count: state.count - 1,
+
+        // 이코드가 왜 필요할까?
+        // 이코드가 어디에서 쓰이는지?
+        // 이코드에 사용법
+
         // todoList컨퍼넌트에 인자로 id를 넘겨 주었기 때문에 id로 분별해낸다.
         // filter메소드를 이용해 list에 id가 payload의 id가 해당하지 않는 list들을 filtering 해 준다.
         lists: state.lists.filter((list) => list.id !== action.payload.id),
