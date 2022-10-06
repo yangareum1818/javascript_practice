@@ -36,13 +36,13 @@
 <body>
   <div class="toggle">
     <h1>최첨단 토글 시스템</h1>
-    <button>토글 버튼이라구 ! 톡을</button>
+    <button>토글 버튼이라구 ! 톡을 !</button>
     <h2>컬러 : {blue} </h2>
   </div>
 
   <script>
-    const button = document.querySelector('button');
     const text = document.querySelector('h2');
+    const button = document.querySelector('button');
     const actived = 'active';
 
     function textChangHandler() {
@@ -53,7 +53,10 @@
       }
     }
 
-    button.addEventListener('click', () => textChangHandler())
+    function onClickEvent() {
+      button.addEventListener('click', () => textChangHandler())
+    }
+    onClickEvent();
 
     // 토클 처음 클릭하면 blue 
     // 두번 클릭하면 red
