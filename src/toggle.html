@@ -41,22 +41,26 @@
   </div>
 
   <script>
-    const text = document.querySelector('h2');
-    const button = document.querySelector('button');
-    const actived = 'active';
+    // 변수들을 지역변수로 넣어서 만들어 보아라 !
+    function ToggleChange () {
+      const text = document.querySelector('h2');
+      const button = document.querySelector('button');
+      const actived = 'active';
 
-    function textChangHandler() {
-      if (text.className === actived) {
-        text.className = ""
-      } else {
-        text.className = actived;
+      function textChangHandler() {
+        if (text.className === actived) {
+          text.className = ""
+        } else {
+          text.className = actived;
+        }
       }
-    }
 
-    function onClickEvent() {
-      button.addEventListener('click', () => textChangHandler())
+      function onClickEvent() {
+        button.addEventListener('click', () => textChangHandler())
+      }
+      onClickEvent();
     }
-    onClickEvent();
+    const ToggleBtn = ToggleChange();
 
     // 토클 처음 클릭하면 blue 
     // 두번 클릭하면 red
