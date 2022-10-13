@@ -1,4 +1,4 @@
-import {Todo } from './reducer/types/Todo';
+import {Todo } from '../reducer/types/Todo';
 
 function todos(todo: Partial<Todo>) {
   
@@ -81,13 +81,13 @@ class Calc {
   }
 }
 
-클래스기반으로 개발을 하면 불변으로 만들수 잇으나, 기본은 변수를 수정한다. => 명령형 프로그래밍
-함수형 기반으로 개발을 하면 불변으로 개발을 무조건 하게 되있고, 변수를 복사해서 수정한다. => 선언형 프로그래밍
+// 클래스기반으로 개발을 하면 불변으로 만들수 잇으나, 기본은 변수를 수정한다. => 명령형 프로그래밍
+// 함수형 기반으로 개발을 하면 불변으로 개발을 무조건 하게 되있고, 변수를 복사해서 수정한다. => 선언형 프로그래밍
 
-1. 쓰레드 세이프 하게 개발이 가능하다. 
+// 1. 쓰레드 세이프 하게 개발이 가능하다. 
 
-t1 => a <= t2 : 데드락, 세마포어... 멀티쓰레드, 동기성... 
-비동기 프로그래밍 callback, promise ... callstack ... que... event loop 
+// t1 => a <= t2 : 데드락, 세마포어... 멀티쓰레드, 동기성... 
+// 비동기 프로그래밍 callback, promise ... callstack ... que... event loop 
 
 
 function add(x, y) {
