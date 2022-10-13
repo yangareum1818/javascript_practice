@@ -42,30 +42,42 @@
 
   <script>
     // 변수들을 지역변수로 넣어서 만들어 보아라 !
-    function ToggleChange () {
-      const text = document.querySelector('h2');
+    function ToggleChange() {
       const button = document.querySelector('button');
-      const actived = 'active';
+      
+      const toggle = (function() {
+        const text = document.querySelector('h2');
+        const actived = "active"
 
-      function textChangHandler() {
-        if (text.className === actived) {
-          text.className = ""
-        } else {
-          text.className = actived;
+        return function() {
+          if (text.className === actived) {
+            text.className = ""
+          } else {
+            text.className = actived
+          }
         }
-      }
-
-      function onClickEvent() {
-        button.addEventListener('click', () => textChangHandler())
-      }
-      onClickEvent();
+      }());
+      
+      button.addEventListener('click', toggle)
     }
-    const ToggleBtn = ToggleChange();
+    ToggleChange();
 
     // 토클 처음 클릭하면 blue 
     // 두번 클릭하면 red
     // 세번 클릭 blue
     // 네번 클릭 red 
+    
+    // ES5에서 var를 사용하여 해결법 : 즉시 실행함수
+    // function timer() {
+    //   for(var i=0; i<10; i++) {
+    //     (function (loop) {
+    //       setTimeout(function() {
+    //         console.log(loop);
+    //       }, 1000)
+    //     })(i)
+    //   }
+    // }
+    // timer();
 
   </script>
 </body>
