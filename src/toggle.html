@@ -1,85 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="assets/css/core.css">
   <title>Document</title>
 </head>
 
-<style>
-  body {
-    padding: 0;
-    margin: 0;
-  }
-  .toggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 50vh;
-  }
-  .toggle > * {
-    display: block;
-  }
-  h2 {
-    color: #fff;
-    background: #00f;
-  }
-  h2.active {
-    background: #f00;
-  }
-</style>
-
 <body>
-  <div class="toggle">
-    <h1>최첨단 토글 시스템</h1>
-    <button>토글 버튼이라구 ! 톡을 !</button>
-    <h2>컬러 : {blue} </h2>
+  <div id="wrap">
+    <header>
+      <h1>로고자리</h1>
+      <nav>
+        <ul class="nav_list">
+          <li><a href="#nav01">nav01</a></li>
+          <li><a href="#nav02">nav02</a></li>
+          <li><a href="#nav03">nav03</a></li>
+          <li><a href="#nav04">nav04</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="section sec-01">
+        <h2>여기는 Section 1 입니다.</h2>
+        <div class="toggle">
+          <p class="toggle_title">최첨단 토글 시스템</p>
+          <span class="chang_text">컬러 : {blue} </span>
+          <button class="toggle_btn">토글 버튼이라구 ! 톡을 !</button>
+        </div>
+      </section>
+      <section class="section sec-02">
+        <h2>여기는 Section 2 입니다.</h2>
+      </section>
+      <section class="section sec-03">
+        <h2>여기는 Section 3 입니다.</h2>
+      </section>
+      <section class="section sec-04">
+        <h2>여기는 Section 4 입니다.</h2>
+      </section>
+    </main>
+    <footer></footer>
   </div>
 
-  <script>
-    // 변수들을 지역변수로 넣어서 만들어 보아라 !
-    function ToggleChange() {
-      const button = document.querySelector('button');
-      
-      const toggle = (function() {
-        const text = document.querySelector('h2');
-        const actived = "active"
-
-        return function() {
-          if (text.className === actived) {
-            text.className = ""
-          } else {
-            text.className = actived
-          }
-        }
-      }());
-      
-      button.addEventListener('click', toggle)
-    }
-    ToggleChange();
-
-    // 토클 처음 클릭하면 blue 
-    // 두번 클릭하면 red
-    // 세번 클릭 blue
-    // 네번 클릭 red 
-    
-    // ES5에서 var를 사용하여 해결법 : 즉시 실행함수
-    // function timer() {
-    //   for(var i=0; i<10; i++) {
-    //     (function (loop) {
-    //       setTimeout(function() {
-    //         console.log(loop);
-    //       }, 1000)
-    //     })(i)
-    //   }
-    // }
-    // timer();
-
-  </script>
+  <script src="assets/js/core.js"></script>
 </body>
 
 </html>
