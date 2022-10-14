@@ -4,15 +4,10 @@ function ToggleChange() {
 
   const toggle = (function () {
     const text = document.querySelector(".chang_text");
-    const CLASSNAME = text.className;
     const actived = "active";
 
     return function () {
-      if (CLASSNAME === actived) {
-        CLASSNAME = "chang_text";
-      } else {
-        CLASSNAME = actived;
-      }
+      text.classList.toggle(actived);
     };
   })();
 
