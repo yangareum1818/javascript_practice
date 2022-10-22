@@ -1,9 +1,9 @@
 // 변수들을 지역변수로 넣어서 만들어 보아라 !
 function ToggleChange() {
   const button = document.querySelector(".toggle_btn");
+  const text = document.querySelector(".chang_text");
 
   const toggle = (function () {
-    const text = document.querySelector(".chang_text");
     const actived = "active";
 
     return function () {
@@ -22,12 +22,12 @@ ToggleChange();
 
 // ES5에서 var를 사용하여 해결법 : 즉시 실행함수
 // function timer() {
-//   for(var i=0; i<10; i++) {
+//   for (var i = 0; i < 10; i++) {
 //     (function (loop) {
-//       setTimeout(function() {
-//         console.log(loop);
-//       }, 1000)
-//     })(i)
+//       setTimeout(function () {
+//         console.log("timer", loop);
+//       }, 1000);
+//     })(i);
 //   }
 // }
 // timer();
