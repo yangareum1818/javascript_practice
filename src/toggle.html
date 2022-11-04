@@ -10,6 +10,21 @@
   <title>Document</title>
 </head>
 
+<style>
+  .message-ball {
+    font-size: 20px;
+    line-height: 200px;
+    text-align: center;
+  }
+  .circle {
+    transition-property: width, height, margin-left, margin-top;
+    transition-duration: 2s;
+    position: fixed;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: red;
+    border-radius: 50%;
+  }
+</style>
 <body>
   <div id="wrap">
     <header>
@@ -31,6 +46,7 @@
           <span class="chang_text">컬러 : {blue} </span>
           <button class="toggle_btn">토글 버튼이라구 ! 톡을 !</button>
         </div>
+        <button onclick="goClick()">Click me me me !!</button>
       </section>
       <section class="section sec-02">
         <h2>여기는 Section 2 입니다.</h2>
@@ -46,6 +62,24 @@
   </div>
 
   <script src="assets/js/core.js"></script>
+  <script>
+    /*
+    let promise1 = new Promise((resolve, reject) => {
+    //promise 생성
+    setTimeout(() => {
+      resolve(3);
+      console.log(1);//3000ms후 실행
+    }, 3000);
+  });
+
+  promise1.then((value) => {//then의 익명함수에서 받은 매개변수는 resolve에 들어있는 값을 받는다.
+    //then안에 promise다음에 실행될 함수를 실행시킨다
+    console.log(2);
+    console.log(value);//value는 resolve에 들어서 반환된 값
+  });
+  */
+  </script>
+  <script src="asynchronous.js"></script>
 </body>
 
 </html>
