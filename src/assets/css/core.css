@@ -1,0 +1,39 @@
+  /* header */
+  header { position: fixed; display: flex; justify-content: space-between; width: 100%; height: 70px; box-shadow: 0 0 10px #eee; }
+  header.active { background: #fff; box-shadow: 0 0 10px #eee;}
+  header h1 { width: 210px; border: 1px solid #000;}
+  .nav_list { display: flex; align-items: center; height: 100%; }
+  .nav_list li { padding: 10px; margin-left: 10px; background: #fff; }
+  .nav_list li:first-child { margin-left: 0; }
+  .nav_list li a { font-size: 18px; color: #000; text-decoration: none; }
+  
+  /* section */
+  .section { display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%; height: 100vh; }
+  .sec-01 { background: #ffdbf8; }
+  .sec-02 { background: #f6ffaa; }
+  .sec-03 { background: #f2edff; }
+  .sec-04 { background: #ffe5ba }
+  
+  .section h2 {
+    font-size: 38px;
+    font-weight: 700;
+  }
+  .toggle {
+    padding: 10px;
+    border: 1px solid #000;
+    background: #fff;
+  }
+  .toggle .toggle_title {
+    font-size: 28px;
+    font-weight: 500;
+  }
+  .toggle .chang_text {
+    color: #fff;
+    background: #00f;
+  }
+  .toggle .chang_text.active {
+    background: #f00;
+  }
+  .toggle .toggle_btn {
+    display: block;
+  }
