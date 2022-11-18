@@ -37,3 +37,13 @@
   .toggle .toggle_btn {
     display: block;
   }
+
+  .sec-02 {}
+  .sec-02 .todo li span {
+    cursor: pointer;
+    font-size: 30px;
+  }
+  .sec-02 .todo li span.checked {
+    text-decoration-line: line-through;
+    color: #f00;
+  }
