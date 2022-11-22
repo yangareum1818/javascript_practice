@@ -3,15 +3,6 @@ const todoInput = todoForm.querySelector(".todo_input");
 
 let spaceToDo = [];
 
-// function order(spaceToDo) {
-//   spaceToDo.sort((dateA, dateB) => {
-//     return dateB.id - dateA.id;
-//   });
-
-//   return console.log(spaceToDo);
-// }
-// order(spaceToDo);
-
 function saveToDo() {
   localStorage.setItem("todolist", JSON.stringify(spaceToDo));
 }
@@ -30,12 +21,13 @@ function drawingTodo(newToDo) {
   const todoText = document.createElement("span");
   const deleteBtn = document.createElement("button");
 
-  todoTotal.innerText = `총 리스트 갯수 : ${newToDo.length} 개`;
-  todoListUI.appendChild(todoList);
+  todoTotal.innerText = `총 리스트 갯수 : ${spaceToDo.length} 개`;
   todoCheckBox.type = "checkbox";
   todoCheckBox.checked = newToDo.checked;
   todoText.textContent = newToDo.text;
   deleteBtn.textContent = "삭제할래요 버튼";
+
+  todoListUI.appendChild(todoList);
 
   todoTotal.append();
   todoList.appendChild(todoCheckBox);
@@ -50,6 +42,7 @@ function drawingTodo(newToDo) {
       todoText.style.textDecoration = "line-through";
       todoList.appendChild(deleteBtn);
     } else {
+      console.log(checkTarget);
       todoText.style.textDecoration = "none";
       todoList.removeChild(deleteBtn);
     }
@@ -66,13 +59,12 @@ function todoSubmitHandler(e) {
   todoInput.value = "";
 
   const newToDoObj = {
-    id: Date.now(),
+    id: spaceToDo.length + 1,
     text: InputValue,
     checked: false,
-    length: spaceToDo.length + 1,
   };
 
-  spaceToDo.push(newToDoObj);
+  spaceToDo.unshift(newToDoObj);
 
   saveToDo();
   drawingTodo(newToDoObj);
@@ -81,11 +73,13 @@ function todoSubmitHandler(e) {
 todoForm.addEventListener("submit", todoSubmitHandler);
 
 const getToDo = JSON.parse(localStorage.getItem("todolist"));
-if (getToDo !== null) {
-  getToDo.forEach((newToDo) => {
-    spaceToDo.push(newToDo);
-    drawingTodo(newToDo);
 
-    console.log(newToDo);
+if (getToDo !== null) {
+  getToDo.forEach((todo) => {
+    // for (let i = spaceToDo.length - 1; i >= 0; i--) {}
+    spaceToDo.push(todo);
+    drawingTodo(todo);
+
+    console.log(todo);
   });
 }
