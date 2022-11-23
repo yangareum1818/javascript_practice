@@ -27,7 +27,7 @@ function drawingTodo(newToDo) {
   todoText.textContent = newToDo.text;
   deleteBtn.textContent = "삭제할래요 버튼";
 
-  todoListUI.appendChild(todoList);
+  todoListUI.prepend(todoList);
 
   todoTotal.append();
   todoList.appendChild(todoCheckBox);
@@ -64,19 +64,17 @@ function todoSubmitHandler(e) {
     checked: false,
   };
 
-  spaceToDo.unshift(newToDoObj);
+  spaceToDo.push(newToDoObj);
 
   saveToDo();
   drawingTodo(newToDoObj);
 }
-
 todoForm.addEventListener("submit", todoSubmitHandler);
 
 const getToDo = JSON.parse(localStorage.getItem("todolist"));
 
 if (getToDo !== null) {
   getToDo.forEach((todo) => {
-    // for (let i = spaceToDo.length - 1; i >= 0; i--) {}
     spaceToDo.push(todo);
     drawingTodo(todo);
 
