@@ -1,27 +1,38 @@
 const todoForm = document.querySelector(".form_group");
 const todoInput = todoForm.querySelector(".todo_input");
-
+const todoListUI = document.querySelector(".todo");
+const TODOLIST_KEY = "todolist";
 let spaceToDo = [];
 
 function saveToDo() {
-  localStorage.setItem("todolist", JSON.stringify(spaceToDo));
+  localStorage.setItem(TODOLIST_KEY, JSON.stringify(spaceToDo));
 }
 
-function clearToDo(e) {
-  const todoli = e.target.parentNode;
+function deleteToDo(e) {
+  console.log(e);
+  const todoli = e.target.parentElement;
   console.log(todoli);
+
+  const todoClear = spaceToDo.filter((todo) => {
+    console.log(todo, parseInt(todoli.id), todoli.id);
+    return todo.id !== parseInt(todoli.id);
+  });
+  spaceToDo = todoClear;
+
   todoli.remove();
+  saveToDo();
 }
 
 function drawingTodo(newToDo) {
   const todoTotal = document.querySelector(".total");
-  const todoListUI = document.querySelector(".todo");
   const todoList = document.createElement("li");
   const todoCheckBox = document.createElement("input");
   const todoText = document.createElement("span");
   const deleteBtn = document.createElement("button");
 
-  todoTotal.innerText = `총 리스트 갯수 : ${spaceToDo.length} 개`;
+  console.log(newToDo);
+  todoList.id = newToDo.id;
+  todoTotal.innerText = `총 리스트 갯수 : ${todoList.id} 개`;
   todoCheckBox.type = "checkbox";
   todoCheckBox.checked = newToDo.checked;
   todoText.textContent = newToDo.text;
@@ -49,7 +60,7 @@ function drawingTodo(newToDo) {
   }
 
   todoCheckBox.addEventListener("click", todoChecked);
-  deleteBtn.addEventListener("click", clearToDo);
+  deleteBtn.addEventListener("click", deleteToDo);
 }
 
 function todoSubmitHandler(e) {
@@ -71,13 +82,10 @@ function todoSubmitHandler(e) {
 }
 todoForm.addEventListener("submit", todoSubmitHandler);
 
-const getToDo = JSON.parse(localStorage.getItem("todolist"));
+const getToDo = JSON.parse(localStorage.getItem(TODOLIST_KEY));
 
 if (getToDo !== null) {
-  getToDo.forEach((todo) => {
-    spaceToDo.push(todo);
-    drawingTodo(todo);
-
-    console.log(todo);
-  });
+  console.log(getToDo);
+  spaceToDo = getToDo;
+  getToDo.forEach((todo) => drawingTodo(todo));
 }
