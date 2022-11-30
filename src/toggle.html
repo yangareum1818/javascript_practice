@@ -24,6 +24,7 @@
     background-color: red;
     border-radius: 50%;
   }
+
 </style>
 <body>
   <div id="wrap">
@@ -40,7 +41,7 @@
     </header>
     <main>
       <section class="section sec-01">
-        <h2>여기는 Section 1 입니다.</h2>
+        <h2>여기는 Section 1 toggle 입니다.</h2>
         <div class="toggle">
           <p class="toggle_title">최첨단 토글 시스템</p>
           <span class="chang_text">컬러 : {blue} </span>
@@ -48,12 +49,26 @@
         </div>
         <button onclick="goClick()">Click me me me !!</button>
       </section>
+
       <section class="section sec-02">
-        <h2>여기는 Section 2 입니다.</h2>
+        <h2>여기는 Section 2 todolist 입니다.</h2>
+
+        <form id="form_todo" class="form_group">
+          <input type="text" class="todo_input" autofocus required />
+          <button class="todo_btn">➕ 추가 할거야 ➕</button>
+          <div>
+            <span class="total">총 리스트 갯수 : 0 개</span>
+            <!-- <button class="reset">모두 삭제</button> -->
+          </div>
+        </form>
+
+        <ul class="todo"></ul>
       </section>
+
       <section class="section sec-03">
         <h2>여기는 Section 3 입니다.</h2>
       </section>
+
       <section class="section sec-04">
         <h2>여기는 Section 4 입니다.</h2>
       </section>
@@ -61,8 +76,32 @@
     <footer></footer>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
   <script src="assets/js/core.js"></script>
+  <script src="assets/js/todolist.js"></script>
+  <!-- <script src="asynchronous.js"></script> -->
   <script>
+    /*
+    // array 배열
+    const arr = ['Jazz', 'Blues'];
+    const newArr = arr;
+
+    arr.push('Rock-n');
+    arr.push('AARock-n');
+    arr.push('AAARock-n');
+    newArr.push('Roll');
+    console.log(arr);
+
+    arr[Math.floor((arr.length - 1) / 2)] = "Classics";
+    console.log(arr);
+
+    arr.shift();
+    console.log(arr);
+
+    arr.unshift('Rap', 'Reggae')
+    console.log(arr);
+    */
+
     /*
     let promise1 = new Promise((resolve, reject) => {
     //promise 생성
@@ -79,7 +118,6 @@
   });
   */
   </script>
-  <script src="asynchronous.js"></script>
 </body>
 
 </html>
