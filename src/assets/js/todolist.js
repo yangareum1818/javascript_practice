@@ -8,39 +8,52 @@ function saveToDo() {
   localStorage.setItem(TODOLIST_KEY, JSON.stringify(spaceToDo));
 }
 
+function totalCount() {
+  const todoTotal = document.querySelector(".total");
+  todoTotal.innerText = `총 리스트 갯수 : ${spaceToDo.length} 개`;
+
+  todoTotal.append();
+
+  saveToDo();
+}
+
 function deleteToDo(e) {
-  console.log(e);
+  // console.log(e);
   const todoli = e.target.parentElement;
-  console.log(todoli);
+  // console.log(todoli);
 
   const todoClear = spaceToDo.filter((todo) => {
-    console.log(todo, parseInt(todoli.id), todoli.id);
+    // console.log(todo, todoli, parseInt(todoli.id), todoli.id);
     return todo.id !== parseInt(todoli.id);
   });
   spaceToDo = todoClear;
 
+  // console.log(spaceToDo.length);
+  // console.log(spaceToDo.length + 1);
+  // console.log(getToDo.length - 1);
   todoli.remove();
   saveToDo();
+  totalCount();
 }
 
 function drawingTodo(newToDo) {
-  const todoTotal = document.querySelector(".total");
   const todoList = document.createElement("li");
   const todoCheckBox = document.createElement("input");
   const todoText = document.createElement("span");
   const deleteBtn = document.createElement("button");
 
-  console.log(newToDo);
-  todoList.id = newToDo.id;
-  todoTotal.innerText = `총 리스트 갯수 : ${todoList.id} 개`;
+  console.log("getToDo", getToDo);
+  console.log("spaceToDo", spaceToDo);
+  const { id, text, checked } = newToDo;
+
+  todoList.id = id;
   todoCheckBox.type = "checkbox";
-  todoCheckBox.checked = newToDo.checked;
-  todoText.textContent = newToDo.text;
+  todoCheckBox.checked = checked;
+  todoText.textContent = text;
   deleteBtn.textContent = "삭제할래요 버튼";
 
   todoListUI.prepend(todoList);
 
-  todoTotal.append();
   todoList.appendChild(todoCheckBox);
   todoList.appendChild(todoText);
 
@@ -58,6 +71,7 @@ function drawingTodo(newToDo) {
       todoList.removeChild(deleteBtn);
     }
   }
+  totalCount();
 
   todoCheckBox.addEventListener("click", todoChecked);
   deleteBtn.addEventListener("click", deleteToDo);
@@ -69,7 +83,11 @@ function todoSubmitHandler(e) {
   const InputValue = todoInput.value;
   todoInput.value = "";
 
+  const dDay = Date.now();
+  console.log(dDay);
+
   const newToDoObj = {
+    // id: Date.now(),
     id: spaceToDo.length + 1,
     text: InputValue,
     checked: false,
@@ -78,6 +96,7 @@ function todoSubmitHandler(e) {
   spaceToDo.push(newToDoObj);
 
   saveToDo();
+  totalCount();
   drawingTodo(newToDoObj);
 }
 todoForm.addEventListener("submit", todoSubmitHandler);
@@ -87,5 +106,5 @@ const getToDo = JSON.parse(localStorage.getItem(TODOLIST_KEY));
 if (getToDo !== null) {
   console.log(getToDo);
   spaceToDo = getToDo;
-  getToDo.forEach((todo) => drawingTodo(todo));
+  getToDo.forEach(drawingTodo);
 }
