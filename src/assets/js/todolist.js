@@ -1,8 +1,6 @@
 const todoForm = document.querySelector(".form_group");
 const todoInput = todoForm.querySelector(".todo_input");
 const todoListUI = document.querySelector(".todo");
-const allCheckedBtn = document.querySelector(".all_checked");
-const allDeleteBtn = document.querySelector(".all_delete");
 const TODOLIST_KEY = "todolist";
 let spaceToDo = [];
 
@@ -30,7 +28,6 @@ function saveToDo() {
 //   console.log(allList);
 
 //   saveToDo();
-//   totalCount();
 // }
 
 // function allChecked(newToDo) {
@@ -54,97 +51,113 @@ function saveToDo() {
 // }
 /**
  * 해야할 것.
- * 1. deleteToDo : checked가 된 list삭제
- * 2. 모두 선택버튼 : list가 1개 이상이면 활성화
- * 3. 모두 선택버튼 클릭시 : 모든 list가 checked가 됌 ( 과 동시에 모두삭제버튼 활성화 )
- * 4. 모두삭제버튼 클릭시 : allDelete()에 로컬스토리지가 아닌 arr.every()메소드 이용해서 모두 삭제.
- *
- * 2. 선택삭제 : checked가 true인 list들만 삭제.
+ * 1. list가 checked 되었을 때 toggle, appendChild or removeChild를 이용해 클래스명추가 (텍스트, 버튼) - 완료
+ * 2. 선택한 list삭제버튼 클릭시 삭제 ( 로컬스토리지까지 삭제. ) - 완료
+ * 3. list 갯수가 0이 되었을 때, ( empty : 화면에 보이게, button : 비활성화 ) - 완료
+ * 4-1. checked된 list 갯수 구하기.
+ * 4-2. 1개이상 checked 되었을 때, 선택된 list버튼 모두삭제(allDeleteBtn) 활성화
+ * 5. 모두 checked버튼 클릭시, 모든 list checkbox가 checked
+ * 6. 선택된 list 모두 삭제 클릭시, 모두 삭제.
  */
 
-const deleteToDo = (e) => {
+function listZero() {
+  const allCheckedBtn = document.querySelector(".all_checked");
+  const emptyText = document.querySelector(".empty");
+
+  // list의 값이 0일 경우 : 모두선택 버튼 활성화 & 비활성화, empty
+  if (spaceToDo.length === 0) {
+    emptyText.style = "display : block";
+    allCheckedBtn.disabled = true;
+  } else {
+    emptyText.style = "display : none";
+    allCheckedBtn.disabled = false;
+  }
+}
+
+function deleteToDo(e) {
   // console.log(e);
   const todoli = e.target.parentElement;
-  // console.log(todoli);
 
-  const todoClear = spaceToDo.filter((todo) => {
-    // console.log(todo, todoli, parseInt(todoli.id), todoli.id);
-    return todo.checked !== todoli.checked;
+  const todoOneDelete = spaceToDo.filter((todo) => {
+    // console.log("MyLog", todo, todoli, todo.id, todoli.id);
+    return todo.id !== parseInt(todoli.id);
   });
-  spaceToDo = todoClear;
-  // console.log(spaceToDo.length);
-  // console.log(spaceToDo.length + 1);
-  // console.log(getToDo.length - 1);
+  spaceToDo = todoOneDelete;
+
   todoli.remove();
   saveToDo();
   totalCount();
-};
-
-const todoChecked = (e) => {
-  const todoList = e.target.parentElement;
-  const todoText = e.target.nextElementSibling;
-  // !!!!input의 checked를 찾아서 spaceToDo checked를 재할당 해줘야하겠어 !
-  // const todoCheck =
-
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "삭제할래요 버튼";
-
-  const checkTarget = e.target.checked;
-  // e.currentTarget.checked = e.target.checked;
-
-  if (checkTarget) {
-    // true;
-    todoText.style.textDecoration = "line-through";
-    todoList.appendChild(deleteBtn);
-  } else {
-    // false;
-    todoText.style.textDecoration = "none";
-    todoList.removeChild(deleteBtn);
-  }
-
-  saveToDo();
-
-  deleteBtn.addEventListener("click", deleteToDo);
-};
+  listZero();
+}
 
 function totalCount() {
   const todoTotal = document.querySelector(".total");
-  todoTotal.innerText = `총 리스트 갯수 : ${spaceToDo.length} 개`;
-
-  // 모두선택 버튼 활성화 & 비활성화
-  if (spaceToDo.length === 0) {
-    allCheckedBtn.disabled = true;
-  } else {
-    allCheckedBtn.disabled = false;
-  }
+  todoTotal.innerHTML = `${spaceToDo.length}`;
 
   todoTotal.append();
 
-  // saveToDo();
+  saveToDo();
 }
 
 function drawingTodo(newToDo) {
   const todoList = document.createElement("li");
   const todoCheckBox = document.createElement("input");
-  const todoText = document.createElement("span");
+  const todoText = document.createElement("p");
+  const deleteBtn = document.createElement("button");
 
-  // console.log("getToDo", getToDo);
-  // console.log("spaceToDo", spaceToDo);
   const { id, text, checked } = newToDo;
 
   todoList.id = id;
   todoCheckBox.type = "checkbox";
+  todoCheckBox.name = "list";
   todoCheckBox.checked = checked;
   todoText.textContent = text;
+  deleteBtn.innerHTML = "이것만 삭제할거야 버튼";
+
+  todoText.classList.add("todo_text");
+  deleteBtn.classList.add("delete_btn");
 
   todoListUI.prepend(todoList);
 
   todoList.appendChild(todoCheckBox);
   todoList.appendChild(todoText);
+  todoList.appendChild(deleteBtn);
 
+  const toggleChecked = function () {
+    // const allDeleteBtn = document.querySelector(".all_delete");
+
+    // const chkLength = document.querySelector(".chk");
+    // chkLength.innerHTML = `${spaceToDo.length}`; // 수정.
+
+    const textChecked = "checked";
+
+    let self = this;
+    console.log("self", self);
+
+    return function () {
+      todoText.classList.toggle(textChecked);
+      deleteBtn.classList.toggle(textChecked);
+
+      // 조건문 해야됌.
+      // 1개 이상 checked된 input이 있다면 allDeleteBtn 활성화.
+      // if (todoCheckBox.checked) {
+      //   allDeleteBtn.disabled = false;
+      // }
+
+      // checked되었을때 true , 안되었을 때 false
+      const chkArray = spaceToDo.flatMap((todo) => {
+        console.log(todo, todo.checked);
+
+        return todo.id;
+      });
+      spaceToDo = chkArray;
+    };
+  };
   totalCount();
+  listZero();
 
-  todoCheckBox.addEventListener("click", todoChecked);
+  todoCheckBox.addEventListener("click", toggleChecked);
+  deleteBtn.addEventListener("click", deleteToDo);
 }
 
 function todoSubmitHandler(e) {
@@ -152,9 +165,6 @@ function todoSubmitHandler(e) {
 
   const InputValue = todoInput.value;
   todoInput.value = "";
-
-  const dDay = Date.now();
-  console.log(dDay);
 
   const newToDoObj = {
     id: Date.now(),

@@ -53,9 +53,14 @@
       <section class="section sec-02">
         <h2>여기는 Section 2 todolist 입니다.</h2>
         <div>
-          <span class="total">총 리스트 갯수 : 0 개</span>
-          <button class="all_checked">모두 Checked</button>
-          <button class="all_delete">모두 삭제</button>
+          <p class="total_text">총 리스트 갯수 :
+            <span class="total">0</span>개
+          </p>
+          <p class="chk_text">선택한 리스트 갯수 :
+            <span class="chk">0</span>개
+          </p>
+          <button class="all_checked" disabled>모두 Checked</button>
+          <button class="all_delete" disabled>checked된 list 모두 삭제</button>
         </div>
 
         <form id="form_todo" class="form_group">
@@ -63,7 +68,12 @@
           <button class="todo_btn">➕ 추가 할거야 ➕</button>
         </form>
 
-        <ul class="todo"></ul>
+        <div class="todo_wrapper">
+          <ul class="todo"></ul>
+          <div class="empty">
+            체크 list를 작성해주세요.
+          </div>
+        </div>
       </section>
 
       <section class="section sec-03">
@@ -80,8 +90,6 @@
   <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
   <script src="assets/js/core.js"></script>
   <script src="assets/js/todolist.js"></script>
-  <!-- <script src="assets/js/forStar.js"></script> -->
-  <!-- <script src="asynchronous.js"></script> -->
   <script>
     /*
     // array 배열

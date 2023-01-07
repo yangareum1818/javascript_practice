@@ -96,7 +96,7 @@ timer(); // 0, 1, 2....
 let loop = 123123;
 log(`loop = ${loop}`);
 
-const toggle = ?
-'button'.querySelect('#button').addEventListner('click', toggle());
+// const toggle = ?
+// 'button'.querySelect('#button').addEventListner('click', toggle());
 
-const label = 'red'; // blue 
+const label = "red"; // blue

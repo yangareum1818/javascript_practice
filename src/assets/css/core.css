@@ -39,11 +39,42 @@
   }
 
   .sec-02 {}
-  .sec-02 .todo li span {
-    cursor: pointer;
-    font-size: 30px;
+  .sec-02 .total_text { text-align: center; }
+  .sec-02 .total_text .total { font-size: 26px; }
+  .sec-02 .chk_text { text-align: center; }
+  .sec-02 .chk_text .chk { font-size: 26px; }
+  .sec-02 .todo_wrapper {
+    margin-top: 20px;
+    padding: 20px;
+    min-width: 380px;
+    min-height: 220px;
+    text-align: center;
+    line-height: 218px;
+    border: 1px solid #000;
   }
-  .sec-02 .todo li span.checked {
+  .sec-02 .todo_wrapper .todo li {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    line-height: 32px;
+  }
+  .sec-02 .todo_wrapper .todo li .todo_text {
+    color: #000;
+    font-size: 30px;
+    text-decoration-line: none;
+    cursor: pointer;
+    transition: all .25s ease;
+  }
+  .sec-02 .todo_wrapper .todo li .todo_text.checked {
     text-decoration-line: line-through;
     color: #f00;
+  }
+  .sec-02 .todo_wrapper .todo li .delete_btn {
+    display: none;
+  }
+  .sec-02 .todo_wrapper .todo li .delete_btn.checked {
+    display: block;
+  }
+  .sec-02 .todo_wrapper .empty.show {
+    display: block;
   }
